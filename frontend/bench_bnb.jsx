@@ -1,12 +1,26 @@
 import React from 'react';
 import ReacDOM from 'react-dom';
-import { signin, logout, signup } from './util/session';
 import configureStore from './store/store';
+import Root from './components/root';
 
 document.addEventListener('DOMContentLoaded', () => {
+  let store;
   const root = document.getElementById('root');
-  const store = configureStore();
+  if (window.currentUser) {
+    const preloadedState = {
+      entities: {
+        users: { [window.currentUser.id]: window.currentUser },
+      },
+      session: { id: window.currentUser.id },
+    };
+    store = configureStore(preloadedState);
+    delete window.currentUser;
+  } else {
+    store = configureStore();
+  }
+  // window.login = signin;
+  // window.logout = logout;
   window.getState = store.getState;
-  window.dispatch = store.dispatch;
-  ReacDOM.render(<h1>Welcome to BenchBnb</h1>, root);
+  // window.dispatch = store.dispatch;
+  ReacDOM.render(<Root store={store} />, root);
 });

@@ -1,5 +1,4 @@
 class Api::SessionsController < ApplicationController
-  before_action :redirect_if_login, except: :destroy
 
   def create
     @user = User.find_by_credentials(
@@ -8,9 +7,11 @@ class Api::SessionsController < ApplicationController
     )
     if @user
       login!(@user)
+      render "api/users/show"
     else
       @user = User.new
       flash.now[:errors] = {base: ['Invalid username or password']}
+      render json: { this: "is an error" }
     end
   end
 

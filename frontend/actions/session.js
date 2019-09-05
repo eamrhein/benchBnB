@@ -26,7 +26,7 @@ export const logoutCurrentUser = () => ({
 });
 
 export const logout = () => (dispatch) => (
-  sessionAPI.logout
+  sessionAPI.logout()
     .then(() => dispatch(logoutCurrentUser()))
 );
 
