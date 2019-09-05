@@ -2,6 +2,7 @@ import React from 'react';
 import ReacDOM from 'react-dom';
 import configureStore from './store/store';
 import Root from './components/root';
+import { fetchBenches } from './actions/bench';
 
 document.addEventListener('DOMContentLoaded', () => {
   let store;
@@ -20,7 +21,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   // window.login = signin;
   // window.logout = logout;
+  window.fetchBenches = fetchBenches;
   window.getState = store.getState;
-  // window.dispatch = store.dispatch;
+  window.dispatch = store.dispatch;
   ReacDOM.render(<Root store={store} />, root);
 });
