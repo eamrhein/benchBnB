@@ -1,10 +1,16 @@
 /* eslint-disable import/prefer-default-export */
-export const fetchBenches = () => (
+export const fetchBenches = (data) => (
   $.ajax({
-    url: '/api/benches',
+    url: 'api/benches',
     method: 'GET',
-    error: (err) => {
-      console.log(err);
-    },
+    data,
+  })
+);
+
+export const createBench = (bench) => (
+  $.ajax({
+    url: 'api/benches',
+    method: 'POST',
+    data: { bench },
   })
 );

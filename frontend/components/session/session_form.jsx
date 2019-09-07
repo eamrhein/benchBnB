@@ -7,8 +7,8 @@ class SessionForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: "",
-      password: "",
+      username: '',
+      password: '',
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -18,6 +18,7 @@ class SessionForm extends React.Component {
     const { submitForm } = this.props;
     const user = { ...this.state };
     submitForm(user);
+    this.props.history.push('/');
   }
 
   // eslint-disable-next-line class-methods-use-this
